@@ -1,5 +1,5 @@
 import Ajv from 'ajv';
-const ajv = new Ajv({ strict: false }); // options can be passed, e.g. {allErrors: true}
+const ajv = new Ajv({ strict: false, useDefaults: true }); // options can be passed, e.g. {allErrors: true}
 
 const msgIdSchema = {
   type: 'string',
@@ -18,10 +18,11 @@ const createSchema = {
   properties: {
     content: { type: 'string' },
     type: { type: 'string' },
-    image: { type: 'string' },
+    image: { type: 'string', default: '' },
     user: { type: 'object' },
+    version: { type: 'string' },
   },
-  required: ['content'],
+  required: ['content', 'type', 'image', 'user', 'version'],
   additionalProperties: false,
 };
 
@@ -40,6 +41,7 @@ const dataSchema = {
     created: { type: 'object' },
     updated: { type: 'object' },
     user: { type: 'object' },
+    version: { type: 'string' },
   },
   required: ['msg_id', 'content'],
   additionalProperties: false,

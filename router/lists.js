@@ -3,14 +3,11 @@ import * as listController from '../controller/list.js';
 
 const router = express.Router();
 
-// GET /lists?msgId=msgId -> query
-
 // paging query O
+// GET /lists
 router.get('/lists', listController.getAllList);
 
-// paging query X
-// router.get("/lists", listController.getListAllOrigin);
-
+// GET /lists?msgId=msgId -> query
 router.get('/list/:msgId', listController.getList);
 
 // Post /lists
