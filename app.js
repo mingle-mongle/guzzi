@@ -4,9 +4,13 @@ import cors from 'cors';
 import morgan from 'morgan';
 import { db } from './db/database.js';
 import listsRouter from './router/lists.js';
+import swaggerOptions from './swagger.js';
+import swaggerUi from 'swagger-ui-express';
+import swaggerJSDoc from 'swagger-jsdoc';
 
 const app = express();
 const port = '8080';
+const specs = swaggerJSDoc(swaggerOptions);
 
 app.use(helmet());
 app.use(express.json());
@@ -15,6 +19,11 @@ app.use(cors());
 app.use(morgan('tiny'));
 
 app.use('/', listsRouter);
+app.use(
+  '/api-docs',
+  swaggerUi.serve,
+  swaggerUi.setup(specs, { explorer: true })
+);
 
 app.use((error, req, res, next) => {
   console.error(error);
