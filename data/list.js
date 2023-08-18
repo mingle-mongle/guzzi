@@ -4,7 +4,7 @@ export async function getAllList(offset) {
   return db
     .execute(
       `
-      SELECT BIN_TO_UUID(msg_id, 1) AS msg_id, content, type, time, image, created, updated, user, version FROM data ORDER BY created DESC LIMIT 20 OFFSET (?);`,
+      SELECT BIN_TO_UUID(msg_id, 1) AS msg_id, content, type, time, image, created, updated, user, version FROM data LIMIT 20 OFFSET (?);`,
       [offset]
     ) //
     .then((result) => result[0]);
