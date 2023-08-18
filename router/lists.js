@@ -8,7 +8,7 @@ const router = express.Router();
 /**
  * @swagger
  * paths:
- *   /lists?page=pageNumber:
+ *   /lists?page={pageNumber}:
  *    get:
  *      tags: [메세지]
  *      summary: 메세지 정보 SELECT 요청
@@ -139,12 +139,15 @@ router.post('/lists', listController.createList);
  *        - name: msgId
  *          in: path
  *          description: 메세지 아이디
- *        - name: content
- *          in: body
- *          description: 메세지 수정 내용
- *          example: {
- *            content: Updated Message!
- *          }
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                content:
+ *                  type: string
  *      responses:
  *        204:
  *          description: No Content 수정 완료
