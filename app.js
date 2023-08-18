@@ -24,5 +24,5 @@ app.use((error, req, res, next) => {
 db.getConnection().then((connection) => console.log('mysql connection'));
 
 app.listen(port, () => {
-  console.log(`app listening on port ${port}`);
+  console.log(`app listening on portTest ${port}`);
 });
