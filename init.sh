@@ -1,3 +1,3 @@
 #!/bin/sh
 
-cp githoooks/* .git/hooks
+cp githooks/* .git/hooks
