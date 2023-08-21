@@ -1,0 +1,22 @@
+#!/bin/sh
+if [ -f .postman ]; then
+  export $(cat .postman | xargs)
+else
+	echo "Please create a .postman file with the following variables:"
+	exit 1
+fi
+# env | grep POSTMAN
+# echo ${POSTMAN_KEY}
+
+postman login --with-api-key ${POSTMAN_KEY}
+a=$(postman collection run ${POSTMAN_COLLECTION})
+
+exit_status=$?
+
+if [ $exit_status -eq 0 ]; then
+  echo "Tests passed"
+  exit 0
+else
+  echo "Tests failed"
+  exit 1
+fi
