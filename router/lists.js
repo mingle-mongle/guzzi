@@ -84,35 +84,34 @@ router.get('/list/:msgId', listController.getList);
  *      tags: [메세지]
  *      summary: 메세지 정보와 유저 정보를 POST 요청
  *      description: 메세지 정보와 유저 정보를 DB에 생성
- *      parameters:
- *        - name: body
- *          in: body
- *          description: 메세지 정보
- *          required: true
- *          schema:
- *            type: object
- *            properties:
- *              content:
- *                type: string
- *              type:
- *                type: string
- *              image:
- *                type: string
- *              user:
- *                type: object
- *              version:
- *                type: string
- *            example:
- *              content: New Message!
- *              type: message
- *              image: data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/
- *              user: {
- *                ip: 127.0.0.1,
- *                role: user,
- *                uuid: bb7d7bee-1ef6-4b0a-811d-752ac8efb860,
- *                device_id: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'
- *              }
- *              version: v1
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                content:
+ *                  type: string
+ *                type:
+ *                  type: string
+ *                image:
+ *                  type: string
+ *                user:
+ *                  type: object
+ *                version:
+ *                  type: string
+ *              example:
+ *                content: New Message!
+ *                type: message
+ *                image: data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/
+ *                user: {
+ *                  ip: 127.0.0.1,
+ *                  role: usexs,
+ *                  uuid: bb7d7bee-1ef6-4b0a-811d-752ac8efb860,
+ *                  device_id: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'
+ *                }
+ *                version: v1
  *      responses:
  *        201:
  *          description: Created 메세지 데이터 등록 완료
@@ -170,9 +169,8 @@ router.put('/list/:msgId', listController.updateList);
  *      description: 메세지 정보 삭제
  *      parameters:
  *        - name: msgId
- *          in: body
+ *          in: path
  *          description: 메세지 아이디
- *          example: '382011ee-b220-2678-95e6-c237631427fe'
  *      responses:
  *        204:
  *          description: No Content 데이터 삭제 완료
