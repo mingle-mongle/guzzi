@@ -15,12 +15,10 @@ jobs:
         uses: actions/setup-node@v3
       - name: install
         run: npm install
-      - name: test
+      - name: make .env
         env:
           DATABASE_URL : ${{ secrets.DATABASE_URL }}
-        run : echo $DATABASE_URL
-      - name: make .env
-        run : echo ${{ secrets.DATABASE_URL }}
+        run : echo "DATABASE_URL=$DATABASE_URL" >> .env; cat .env
       - name: e2e test
         run: npm run test
 
