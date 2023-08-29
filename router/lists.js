@@ -2,9 +2,6 @@ import express from 'express';
 import * as listController from '../controller/list.js';
 
 const router = express.Router();
-
-// paging query O
-// GET /lists
 /**
  * @swagger
  * paths:
@@ -43,8 +40,6 @@ const router = express.Router();
  *                  error: "Error: Page validate Error"
  */
 router.get('/lists', listController.getAllList);
-
-// GET /lists?msgId=msgId -> query
 /**
  * @swagger
  * paths:
@@ -74,8 +69,6 @@ router.get('/lists', listController.getAllList);
  *               $ref: '#/components/schemas/Error'
  */
 router.get('/list/:msgId', listController.getList);
-
-// Post /lists
 /**
  * @swagger
  * paths:
@@ -123,8 +116,6 @@ router.get('/list/:msgId', listController.getList);
  *               $ref: '#/components/schemas/Error'
  */
 router.post('/lists', listController.createList);
-
-// Put /lists/:id -> params
 /**
  * @swagger
  * paths:
@@ -158,7 +149,6 @@ router.post('/lists', listController.createList);
  *               $ref: '#/components/schemas/Error'
  */
 router.put('/list/:msgId', listController.updateList);
-
 /**
  * @swagger
  * paths:
