@@ -8,7 +8,7 @@ const options = {
     },
     servers: [
       {
-        url: 'https://jy2nz7ujfp.ap-northeast-1.awsapprunner.com/',
+        url: 'https://aabnh8if56.ap-northeast-1.awsapprunner.com',
         description: '메인 서버',
       },
     ],
