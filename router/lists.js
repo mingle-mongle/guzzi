@@ -43,7 +43,7 @@ const router = express.Router();
  *                  error: "Error: Page validate Error"
  */
 router.get('/lists', listController.getAllList);
-
+router.get('/listsCount', listController.getAllListCount);
 // GET /lists?msgId=msgId -> query
 /**
  * @swagger
