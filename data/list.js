@@ -22,7 +22,7 @@ export async function getAllList(offset, mainOffset) {
 export async function getByMsgId(msgId) {
   return db
     .execute(
-      `SELECT BIN_TO_UUID(msg_id, 1) AS msg_id, content, type, image, created, updated, user, version FROM data WHERE msg_id= UUID_TO_BIN(?,1)`,
+      `SELECT BIN_TO_UUID(msg_id, 1) AS msg_id, content, type, image, created, updated, user, version FROM data WHERE msg_id= UUID_TO_BIN(?,0)`,
       [msgId]
     ) //
     .then((result) => result[0][0]);
@@ -48,7 +48,7 @@ export async function createList(content, type, image, user, version, time) {
  * @param {string} content 메세지 내용
  */
 export async function updateList(msgId, content) {
-  return db.execute(`UPDATE data SET content=? WHERE msg_id=UUID_TO_BIN(?,1)`, [
+  return db.execute(`UPDATE data SET content=? WHERE msg_id=UUID_TO_BIN(?,0)`, [
     content,
     msgId,
   ]);
@@ -58,5 +58,5 @@ export async function updateList(msgId, content) {
  * @param {string} msgId 메세지아이디
  */
 export async function deleteList(msgId) {
-  return db.execute(`DELETE FROM data WHERE msg_id=UUID_TO_BIN(?,1)`, [msgId]);
+  return db.execute(`DELETE FROM data WHERE msg_id=UUID_TO_BIN(?,0)`, [msgId]);
 }
