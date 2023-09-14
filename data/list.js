@@ -12,7 +12,7 @@ export async function getAllList(offset, mainOffset) {
       // `select * from bufferTest;`
       //
       `
-        SELECT BIN_TO_UUID(msg_id, 1) AS msg_id, content, type, time, image, created, updated, user, version FROM bufferTest WHERE time >= (SELECT time FROM bufferTest LIMIT 1 OFFSET (?)) LIMIT 20 offset (?);`,
+        SELECT BIN_TO_UUID(msg_id, 0) AS msg_id, content, type, time, image, created, updated, user, version FROM bufferTest WHERE time >= (SELECT time FROM bufferTest LIMIT 1 OFFSET (?)) LIMIT 20 offset (?);`,
       [offset, mainOffset]
       // `select count(*) from bufferTest;`
     ) //
