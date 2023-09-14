@@ -6,8 +6,9 @@ export async function getAllList(req, res) {
   try {
     const page = validate.pageValid(Number(req.query.page));
     const limit = 20;
-    const offset = (page - 1) * limit;
-    const data = await listRepository.getAllList(offset);
+    const offset = page * limit;
+    const mainOffset = (page - 1) * limit;
+    const data = await listRepository.getAllList(offset, mainOffset);
     res.status(200).json(data);
   } catch (error) {
     res.status(400).json({ error: error.toString() });

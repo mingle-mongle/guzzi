@@ -5,12 +5,12 @@ import { db } from '../db/database.js';
  * @param {number} offset 페이지 번호;
  * @returns DB에서 가져온 데이터
  */
-export async function getAllList(offset) {
+export async function getAllList(offset, mainOffset) {
   return db
     .execute(
       `
-      SELECT BIN_TO_UUID(msg_id, 1) AS msg_id, content, type, time, image, created, updated, user, version FROM data ORDER BY created DESC LIMIT 20 OFFSET (?);`,
-      [offset]
+      SELECT BIN_TO_UUID(msg_id, 0) AS msg_id, content, type, time, image, created, updated, user, version FROM data WHERE time >= (SELECT time FROM data LIMIT 1 OFFSET (?)) LIMIT 20 offset (?);`,
+      [offset, mainOffset]
     ) //
     .then((result) => result[0]);
 }
