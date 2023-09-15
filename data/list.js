@@ -36,11 +36,13 @@ export async function getByMsgId(msgId) {
  * @param {string} version 버전 정보
  * @param {number} time unixTime
  */
-export async function createList(content, type, image, user, version, time) {
-  return db.execute(
-    `INSERT INTO data (content, type, time, image, user, version) VALUES (?,?,?,?,?,?)`,
-    [content, type, time, image, user, version]
-  );
+export async function createList(list) {
+  return db
+    .execute(
+      `INSERT INTO data (content, type, time, image, user, version) VALUES (?,?,?,?,?,?)`,
+      [list.content, list.type, list.time, list.image, list.user, list.version]
+    )
+    .then((result) => result[0].affectedRows);
 }
 /**
  * 메세지아이디로 구분하여 메세지 정보 PUT 요청
@@ -48,15 +50,19 @@ export async function createList(content, type, image, user, version, time) {
  * @param {string} content 메세지 내용
  */
 export async function updateList(msgId, content) {
-  return db.execute(`UPDATE data SET content=? WHERE msg_id=UUID_TO_BIN(?,0)`, [
-    content,
-    msgId,
-  ]);
+  return db
+    .execute(`UPDATE data SET content=? WHERE msg_id=UUID_TO_BIN(?,0)`, [
+      content,
+      msgId,
+    ])
+    .then((result) => result[0].affectedRows);
 }
 /**
  * 메세지 DELETE 요청
  * @param {string} msgId 메세지아이디
  */
 export async function deleteList(msgId) {
-  return db.execute(`DELETE FROM data WHERE msg_id=UUID_TO_BIN(?,0)`, [msgId]);
+  return db
+    .execute(`DELETE FROM data WHERE msg_id=UUID_TO_BIN(?,0)`, [msgId])
+    .then((result) => result[0].affectedRows);
 }
